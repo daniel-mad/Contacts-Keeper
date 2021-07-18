@@ -1,0 +1,4 @@
+{
+  "mongoURI": "your_mpngodb_url",
+  "JWT_SECRET": "your_secret"
+}
