@@ -9,12 +9,18 @@ const Navbar = ({ title, icon }) => {
         <i className={icon} /> {title}
       </h1>
       <ul>
-        <l1>
+        <li>
           <Link to="/">Home</Link>
-        </l1>
-        <l1>
+        </li>
+        <li>
           <Link to="/about">About</Link>
-        </l1>
+        </li>
+        <li>
+          <Link to="/register">Register</Link>
+        </li>
+        <li>
+          <Link to="/login">Login</Link>
+        </li>
       </ul>
     </nav>
   );
