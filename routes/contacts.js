@@ -53,15 +53,37 @@ router.post(
 // @route   PUT api/contacts/:id
 // @desc    Update contact
 // @access  Private
-router.put('/:id', (req, res) => {
-  res.send('Add conatact');
+router.put('/:id', async (req, res) => {
+  const { name, email, phone, type } = req.body;
+  const contactFields = {};
+  if (name) contactFields.name = name;
+  if (email) contactFields.email = email;
+  if (phone) contactFields.phone = phone;
+  if (type) contactFields.type = type;
+  const contact = await Contact.findByIdAndUpdate(
+    req.params.id,
+    contactFields,
+    { new: true }
+  );
+  res.json(contact);
+  try {
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).json({ msg: 'Server Error' });
+  }
 });
 
 // @route   DELETE api/contacts/:id
 // @desc    Delete contact
 // @access  Private
-router.delete('/:id', (req, res) => {
-  res.send('Add conatact');
+router.delete('/:id', auth, async (req, res) => {
+  try {
+    await Contact.findByIdAndDelete(req.params.id);
+    res.json({ msg: 'Contact removed' });
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).json({ msg: 'Server Error' });
+  }
 });
 
 module.exports = router;
